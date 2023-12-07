@@ -32,7 +32,10 @@ const loadData = () => {
     }
 }
 
+
+
 export default function HomeScreen(props) {
+    const specificToLanguages = ['asm_Beng', 'eng_Latn']
     const params = props.route.params || {};
 
     const dispatch = useDispatch();
@@ -40,8 +43,8 @@ export default function HomeScreen(props) {
 
     const [enteredText, setEnteredText] = useState("");
     const [resultText, setResultText] = useState("");
-    const [languageTo, setLanguageTo] = useState("fr");
-    const [languageFrom, setLanguageFrom] = useState("en");
+    const [languageTo, setLanguageTo] = useState("asm_Beng");
+    const [languageFrom, setLanguageFrom] = useState("eng_Latn");
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -121,6 +124,7 @@ export default function HomeScreen(props) {
                 onPress={() => props.navigation.navigate("languageSelect", { title: "Translate to", selected: languageTo, mode: 'to' })}>
                 <Text style={styles.languageOptionText}>{supportedLanguages[languageTo]}</Text>
             </TouchableOpacity>
+             
         </View>
 
         <View style={styles.inputContainer}>
@@ -240,3 +244,147 @@ const styles = StyleSheet.create({
     padding: 10
   }
 });
+
+
+
+// import React from 'react';
+// import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+// import { AntDesign } from '@expo/vector-icons';
+// import colors from '../utils/colors';
+// import supportedLanguages from '../utils/supportedLanguages';
+
+// export default function HomeScreen(props) {
+//   const specificToLanguages = ['asm_Beng', 'eng_Latn'];
+//   const params = props.route.params || {};
+
+//   const { languageFrom } = params;
+//   const selectedLanguageTo = params?.selectedLanguageTo || 'asm_Beng';
+
+//   return (
+//     <View style={styles.container}>
+//       <View style={styles.languageContainer}>
+//         <TouchableOpacity
+//           style={styles.languageOption}
+//           onPress={() =>
+//             props.navigation.navigate('languageSelect', {
+//               title: 'Translate from',
+//               selected: languageFrom || 'eng_Latn',
+//               mode: 'from',
+//             })
+//           }
+//         >
+//           <Text style={styles.languageOptionText}>{supportedLanguages[languageFrom || 'eng_Latn']}</Text>
+//         </TouchableOpacity>
+
+//         <View style={styles.arrowContainer}>
+//           <AntDesign name="arrowright" size={24} color={colors.lightGrey} />
+//         </View>
+
+//         <TouchableOpacity
+//           style={styles.languageOption}
+//           onPress={() =>
+//             props.navigation.navigate('languageSelect', {
+//               title: 'Translate to',
+//               selected: selectedLanguageTo,
+//               mode: 'to',
+//             })
+//           }
+//         >
+//           <Text style={styles.languageOptionText}>{supportedLanguages[selectedLanguageTo]}</Text>
+//         </TouchableOpacity>
+//       </View>
+
+//       <View style={styles.inputContainer}>
+//         <TextInput
+//           multiline
+//           placeholder="Enter text"
+//           style={styles.textInput}
+//           onChangeText={() => {}}
+//         />
+
+//         <TouchableOpacity disabled style={styles.iconContainer}>
+//           {/* Your icon component here */}
+//         </TouchableOpacity>
+//       </View>
+
+//       <View style={styles.resultContainer}>
+//         <Text style={styles.resultText}>{/* Result text here */}</Text>
+
+//         <TouchableOpacity disabled style={styles.iconContainer}>
+//           {/* Your icon component here */}
+//         </TouchableOpacity>
+//       </View>
+
+//       <View style={styles.historyContainer}>
+//         {/* Your FlatList or history component here */}
+//       </View>
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//   },
+//   languageContainer: {
+//     flexDirection: 'row',
+//     borderBottomColor: colors.lightGrey,
+//     borderBottomWidth: 1,
+//   },
+//   languageOption: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     paddingVertical: 15,
+//   },
+//   arrowContainer: {
+//     width: 50,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   languageOptionText: {
+//     color: colors.primary,
+//     fontFamily: 'regular',
+//     letterSpacing: 0.3,
+//   },
+//   inputContainer: {
+//     flexDirection: 'row',
+//     borderBottomColor: colors.lightGrey,
+//     borderBottomWidth: 1,
+//   },
+//   textInput: {
+//     flex: 1,
+//     marginTop: 10,
+//     paddingHorizontal: 20,
+//     paddingVertical: 15,
+//     fontFamily: 'regular',
+//     letterSpacing: 0.3,
+//     height: 90,
+//     color: colors.textColor,
+//   },
+//   iconContainer: {
+//     paddingHorizontal: 10,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   resultContainer: {
+//     borderBottomColor: colors.lightGrey,
+//     borderBottomWidth: 1,
+//     flexDirection: 'row',
+//     height: 90,
+//     paddingVertical: 15,
+//   },
+//   resultText: {
+//     fontFamily: 'regular',
+//     letterSpacing: 0.3,
+//     color: colors.primary,
+//     flex: 1,
+//     marginHorizontal: 20,
+//   },
+//   historyContainer: {
+//     backgroundColor: colors.greyBackground,
+//     flex: 1,
+//     padding: 10,
+//   },
+// });
