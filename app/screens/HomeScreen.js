@@ -78,14 +78,14 @@ export default function HomeScreen(props) {
 
         try {
             setIsLoading(true);
-            const result = await translate(enteredText, languageFrom, languageTo);
+            const result = await translate(languageFrom, languageTo, enteredText);
 
             if (!result) {
                 setResultText("");
                 return;
             }
 
-            const textResult = result.translated_text[result.to];
+            const textResult = result.translated_text;
             setResultText(textResult);
 
             const id = uuid.v4();

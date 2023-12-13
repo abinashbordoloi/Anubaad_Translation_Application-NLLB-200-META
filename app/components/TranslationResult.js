@@ -19,6 +19,7 @@ export default TranslationResult = props => {
     const isSaved = savedItems.some(i => i.id === itemId);
     const starIcon = isSaved ? "star" : "star-outlined";
 
+
     const starItem = useCallback(async () => {
         let newSavedItems;
 

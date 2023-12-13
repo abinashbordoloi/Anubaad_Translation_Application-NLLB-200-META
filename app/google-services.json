@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "864332858995",
+    "project_id": "aubaad-e92dd",
+    "storage_bucket": "aubaad-e92dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864332858995:android:f7612d2a99a459c5414c06",
+        "android_client_info": {
+          "package_name": "com.nllb.anubaad"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_SZ64HMf7xL2V5TBI9fjZ5TSCozioRec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
