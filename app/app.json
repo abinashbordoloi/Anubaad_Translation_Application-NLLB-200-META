@@ -1,15 +1,19 @@
 {
   "expo": {
-    "name": "GoogleTranslate",
-    "slug": "GoogleTranslate",
+    "name": "Anubaad",
+    "slug": "AnubaadAssameseTranslationApplication",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splashscreen.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splashscreenA.png",
+      "resizeMode": "fit",
+      "backgroundColor": "#ffffff",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "text": "Assamese Language Translation Application",
+      "color": "black"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
