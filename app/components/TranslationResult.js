@@ -41,10 +41,13 @@ export default TranslationResult = props => {
         <View style={styles.textContainer}>
             <Text
                 numberOfLines={4}
-                style={styles.title}>{item.original_text}</Text>
+                style={styles.title}>{item.source}</Text>
             <Text
                 numberOfLines={4}
-                style={styles.subTitle}>{item.translated_text[item.to]}</Text>
+                style={styles.subTitle}>{item.translated_text}</Text>
+            <Text
+                numberOfLines={4}
+                style={styles.subTitle}>{item.dateTime}</Text>
         </View>
 
         <TouchableOpacity

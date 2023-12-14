@@ -72,7 +72,7 @@ export const translate = async (languageFrom, languageTo,text) => {
         // console.log(response.data);
        
         const  translation  = response.data;
-        console.log(translation);
+       
 
         if (translation && translation.result) {
             const id = uuid.v4();
@@ -86,8 +86,9 @@ export const translate = async (languageFrom, languageTo,text) => {
                 target: translation.target,
                 inferenceTime: translation.inference_time // Add other properties from the API response as needed
             };
-
+            console.log(translationResult);
             return translationResult;
+            
         } else {
             throw new Error('Translation failed: No result found');
         }
