@@ -1,20 +1,21 @@
-import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from './screens/HomeScreen';
-import SettingsScreen from './screens/SettingsScreen';
-import SavedScreen from './screens/SavedScreen';
-import LanguageSelectScreen from './screens/LanguageSelectScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo, Ionicons } from '@expo/vector-icons';
-import * as SplashScreen from 'expo-splash-screen';
-import { useCallback, useEffect, useState } from 'react';
-import * as Font from 'expo-font';
-import colors from './utils/colors';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Provider } from 'react-redux';
-import store from './store/store';
+import "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from "./screens/HomeScreen";
+import SettingsScreen from "./screens/SettingsScreen";
+import SavedScreen from "./screens/SavedScreen";
+import CameraOcrScreen from "./screens/CameraScreen";
+import LanguageSelectScreen from "./screens/LanguageSelectScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Entypo, Ionicons } from "@expo/vector-icons";
+import * as SplashScreen from "expo-splash-screen";
+import { useCallback, useEffect, useState } from "react";
+import * as Font from "expo-font";
+import colors from "./utils/colors";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 // AsyncStorage.clear();
@@ -25,14 +26,15 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator
-      screenOptions={{ headerShown: false }}>
+    <Tab.Navigator screenOptions={{ headerShown: true }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
           tabBarLabel: "Home",
-          tabBarIcon: (props) => <Entypo name="home" size={props.size} color={props.color} />
+          tabBarIcon: (props) => (
+            <Entypo name="home" size={props.size} color={props.color} />
+          ),
         }}
       />
 
@@ -41,7 +43,9 @@ const TabNavigator = () => {
         component={SavedScreen}
         options={{
           tabBarLabel: "Saved",
-          tabBarIcon: (props) => <Entypo name="star" size={props.size} color={props.color} />
+          tabBarIcon: (props) => (
+            <Entypo name="star" size={props.size} color={props.color} />
+          ),
         }}
       />
 
@@ -50,17 +54,29 @@ const TabNavigator = () => {
         component={SettingsScreen}
         options={{
           tabBarLabel: "Settings",
-          tabBarIcon: (props) => <Ionicons name="settings" size={props.size} color={props.color} />
+          tabBarIcon: (props) => (
+            <Ionicons name="settings" size={props.size} color={props.color} />
+          ),
+        }}
+      />
+
+<Tab.Screen
+        name="CameraOCR"
+        component={CameraOcrScreen}
+        options={{
+          tabBarLabel: "Camera OCR",
+          tabBarIcon: (props) => (
+            <Entypo name="camera" size={props.size} color={props.color} />
+          ),
         }}
       />
     </Tab.Navigator>
-  )
-}
+  );
+};
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
   const [appIsLoaded, setAppIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -80,17 +96,14 @@ export default function App() {
           thin: require("./assets/fonts/Roboto-Thin.ttf"),
           thinItalic: require("./assets/fonts/Roboto-ThinItalic.ttf"),
         });
-      }
-      catch (e) {
+      } catch (e) {
         console.log(e);
-      }
-      finally {
+      } finally {
         setAppIsLoaded(true);
       }
     };
 
     prepare();
-
   }, []);
 
   const onLayout = useCallback(async () => {
@@ -98,7 +111,7 @@ export default function App() {
       await SplashScreen.hideAsync();
     }
   }, [appIsLoaded]);
-  
+
   if (!appIsLoaded) {
     return null;
   }
@@ -108,35 +121,36 @@ export default function App() {
       <NavigationContainer>
         <View onLayout={onLayout} style={{ flex: 1 }}>
           <Stack.Navigator
-          screenOptions={{
-            headerTitleStyle: {
-              fontFamily: 'medium',
-              color: 'white'
-            },
-            headerStyle: {
-              backgroundColor: colors.primary
-            }
-          }}>
+            screenOptions={{
+              headerTitleStyle: {
+                fontFamily: "medium",
+                color: "white",
+              },
+              headerStyle: {
+                backgroundColor: colors.primary,
+              },
+            }}
+          >
             <Stack.Group>
               <Stack.Screen
                 name="main"
                 component={TabNavigator}
                 options={{
-                  headerTitle: "Translate"
+                  headerTitle: "Anubad",
                 }}
               />
             </Stack.Group>
 
             <Stack.Group
               screenOptions={{
-                presentation: 'containedModal',
+                presentation: "containedModal",
                 headerStyle: {
-                  backgroundColor: 'white'
+                  backgroundColor: "white",
                 },
                 headerTitleStyle: {
                   color: colors.textColor,
-                  fontFamily: 'medium'
-                }
+                  fontFamily: "medium",
+                },
               }}
             >
               <Stack.Screen
@@ -154,8 +168,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

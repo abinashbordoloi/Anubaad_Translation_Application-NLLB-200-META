@@ -26,12 +26,19 @@ def translate():
     try:
         # Get data from the request
         data = request.get_json()
+        print(data)
         source_language = data.get('sourceLanguage')
         target_language = data.get('targetLanguage')
-        print(type(source_language))
+        print(source_language)
+        print(target_language)
         input_text = data.get('inputText')
+        print(input_text)
         source_language = LANGS[source_language]
         target_language = LANGS[target_language]
+        print(source_language)
+        print(target_language)
+
+
 
 
 
@@ -42,6 +49,7 @@ def translate():
             input_text,
             api_name="/predict"
         )
+        print(result)
         return jsonify(result)
         # return jsonify({"translation": result})
 
