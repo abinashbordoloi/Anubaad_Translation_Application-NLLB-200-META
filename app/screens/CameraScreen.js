@@ -1,4 +1,207 @@
-// import React, { useState, useEffect, useRef } from 'react';
+// // import React, { useState, useEffect, useRef } from 'react';
+// // import {
+// //   View,
+// //   Button,
+// //   Image,
+// //   Text,
+// //   StyleSheet,
+// //   TouchableOpacity,
+// // } from 'react-native';
+// // import * as ImagePicker from 'expo-image-picker';
+// // import { Camera, AutoFocus } from 'expo-camera';
+// // import { RNTesseractOcr } from 'react-native-tesseract-ocr';
+// // import { MaterialIcons } from '@expo/vector-icons';
+// // import { useIsFocused } from '@react-navigation/native';
+
+// // export default function CameraComponent() {
+// //   const [hasCameraPermission, setHasCameraPermission] = useState(false);
+// //   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
+// //   const [image, setImage] = useState(null);
+// //   const [recognizedText, setRecognizedText] = useState('');
+// //   const [isCameraReady, setIsCameraReady] = useState(false);
+// //   const [showCamera, setShowCamera] = useState(false);
+// //   const cameraRef = useRef(null);
+// //   const isFocused = useIsFocused();
+
+// //   const requestPermissions = async () => {
+// //     try {
+// //       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+// //       if (status === 'granted') {
+// //         setHasCameraPermission(true);
+// //       }
+// //     } catch (error) {
+// //       console.log('Error requesting media library permissions:', error);
+// //     }
+
+// //     try {
+// //       const { status } = await Camera.requestCameraPermissionsAsync();
+// //       if (status === 'granted') {
+// //         setHasCameraPermission(true);
+// //         setShowCamera(true);
+// //       }
+// //     } catch (error) {
+// //       console.log('Error requesting camera permissions:', error);
+// //     }
+// //   };
+
+// //   useEffect(() => {
+// //     requestPermissions();
+// //   }, []);
+
+// //   const takePicture = async () => {
+// //     if (isCameraReady && cameraRef.current) {
+// //       try {
+// //         const photo = await cameraRef.current.takePictureAsync();
+// //         setImage(photo.uri);
+// //         processImage(photo.uri);
+// //         setShowCamera(false);
+// //       } catch (error) {
+// //         console.log('Error taking picture:', error);
+// //       }
+// //     } else {
+// //       console.log('Camera is not ready');
+// //     }
+// //   };
+
+// //   const pickImage = async () => {
+// //     let result = await ImagePicker.launchImageLibraryAsync({
+// //       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+// //       allowsEditing: true,
+// //       aspect: [4, 3],
+// //       quality: 1,
+// //     });
+
+// //     if (!result.cancelled) {
+// //       setImage(result.uri);
+// //       processImage(result.uri);
+// //       setShowCamera(false); // Hide the camera view after picking an image
+// //     }
+// //   };
+
+// //   const switchCameraType = () => {
+// //     setCameraType(
+// //       cameraType === Camera.Constants.Type.back
+// //         ? Camera.Constants.Type.front
+// //         : Camera.Constants.Type.back
+// //     );
+// //   };
+
+// //   const processImage = async (uri) => {
+// //     try {
+// //       const tesseractOptions = {};
+// //       const recognizedText = await RNTesseractOcr.recognize(
+// //         uri,
+// //         'LANG_ENGLISH',
+// //         tesseractOptions
+// //       );
+
+// //       if (recognizedText) {
+// //         setRecognizedText(recognizedText);
+// //       }
+// //     } catch (error) {
+
+// //       console.log('Error recognizing text:', error);
+// //       setRecognizedText('Error recognizing text.');
+// //     }
+// //   };
+
+// //   const takeAgain = () => {
+// //     setImage(null);
+// //     setRecognizedText('');
+// //     setShowCamera(true);
+// //   };
+
+// //   return (
+// //     <View style={styles.container}>
+// //       {showCamera && isFocused && hasCameraPermission && (
+// //         <Camera
+// //           style={styles.camera}
+// //           type={cameraType}
+// //           ref={cameraRef}
+// //           autoFocus={AutoFocus.on}
+// //           onCameraReady={() => setIsCameraReady(true)}
+// //         >
+// //           <View style={styles.buttonContainer}>
+// //             <View style={styles.button}>
+// //               <Button title="Take Picture" onPress={takePicture} />
+// //             </View>
+// //             <View style={styles.button}>
+// //               <Button title="Pick Image" onPress={pickImage} />
+// //             </View>
+// //           </View>
+// //         </Camera>
+// //       )}
+// //       {/* Display captured image */}
+// //       {image && (
+// //         <View style={styles.imagePreviewContainer}>
+// //           <Image source={{ uri: image }} style={styles.imagePreview} />
+// //           <TouchableOpacity style={styles.takeAgainButton} onPress={takeAgain}>
+// //             <Text style={styles.takeAgainText}>Take Again</Text>
+// //           </TouchableOpacity>
+// //         </View>
+// //       )}
+// //       {/* Display recognized text */}
+// //       {recognizedText !== '' && <Text>{recognizedText}</Text>}
+// //       {/* Switch camera button */}
+// //       <TouchableOpacity
+// //         style={styles.switchCameraButton}
+// //         onPress={switchCameraType}
+// //       >
+// //         <MaterialIcons name="switch-camera" size={24} color="white" />
+// //       </TouchableOpacity>
+// //     </View>
+// //   );
+// // }
+
+// // const styles = StyleSheet.create({
+// //   container: {
+// //     flex: 1,
+// //   },
+// //   camera: {
+// //     flex: 1,
+// //   },
+// //   buttonContainer: {
+// //     flex: 1,
+// //     backgroundColor: 'transparent',
+// //     flexDirection: 'row',
+// //     justifyContent: 'center',
+// //     alignItems: 'flex-end',
+// //     marginBottom: 20,
+// //   },
+// //   button: {
+// //     margin: 10,
+// //   },
+// //   imagePreviewContainer: {
+// //     flex: 1,
+// //   },
+// //   imagePreview: {
+// //     flex: 1,
+// //   },
+// //   takeAgainButton: {
+// //     position: 'absolute',
+// //     bottom: 20,
+// //     alignSelf: 'center',
+// //     backgroundColor: '#fff',
+// //     paddingVertical: 10,
+// //     paddingHorizontal: 20,
+// //     borderRadius: 5,
+// //   },
+// //   takeAgainText: {
+// //     color: 'blue',
+// //     fontWeight: 'bold',
+// //   },
+// //   switchCameraButton: {
+// //     position: 'absolute',
+// //     top: 20,
+// //     right: 20,
+// //     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+// //     borderRadius: 30,
+// //     padding: 10,
+// //   },
+// // });
+
+// //GOOGLE VISION API LOGIC
+// import React, { useState, useEffect, useRef } from "react";
 // import {
 //   View,
 //   Button,
@@ -6,18 +209,21 @@
 //   Text,
 //   StyleSheet,
 //   TouchableOpacity,
-// } from 'react-native';
-// import * as ImagePicker from 'expo-image-picker';
-// import { Camera, AutoFocus } from 'expo-camera';
-// import { RNTesseractOcr } from 'react-native-tesseract-ocr';
-// import { MaterialIcons } from '@expo/vector-icons';
-// import { useIsFocused } from '@react-navigation/native';
+//   FlatList,
+// } from "react-native";
+// import * as ImagePicker from "expo-image-picker";
+// import { Camera, AutoFocus } from "expo-camera";
+// import { MaterialIcons } from "@expo/vector-icons";
+// import { useIsFocused } from "@react-navigation/native";
+// import axios from "axios";
+// import * as FileSystem from "expo-file-system";
 
 // export default function CameraComponent() {
 //   const [hasCameraPermission, setHasCameraPermission] = useState(false);
 //   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
 //   const [image, setImage] = useState(null);
-//   const [recognizedText, setRecognizedText] = useState('');
+//   const [recognizedText, setRecognizedText] = useState("");
+//   const [googleResposne, setGoogleResponse] = useState(null);
 //   const [isCameraReady, setIsCameraReady] = useState(false);
 //   const [showCamera, setShowCamera] = useState(false);
 //   const cameraRef = useRef(null);
@@ -25,22 +231,23 @@
 
 //   const requestPermissions = async () => {
 //     try {
-//       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-//       if (status === 'granted') {
+//       const { status } =
+//         await ImagePicker.requestMediaLibraryPermissionsAsync();
+//       if (status === "granted") {
 //         setHasCameraPermission(true);
 //       }
 //     } catch (error) {
-//       console.log('Error requesting media library permissions:', error);
+//       console.log("Error requesting media library permissions:", error);
 //     }
 
 //     try {
 //       const { status } = await Camera.requestCameraPermissionsAsync();
-//       if (status === 'granted') {
+//       if (status === "granted") {
 //         setHasCameraPermission(true);
 //         setShowCamera(true);
 //       }
 //     } catch (error) {
-//       console.log('Error requesting camera permissions:', error);
+//       console.log("Error requesting camera permissions:", error);
 //     }
 //   };
 
@@ -48,18 +255,75 @@
 //     requestPermissions();
 //   }, []);
 
+//   const processImage = async (uri) => {
+//     try {
+//       const base64ImageData = await FileSystem.readAsStringAsync(uri, {
+//         encoding: FileSystem.EncodingType.Base64,
+//       });
+
+//       const requestData = {
+//         requests: [
+//           {
+//             features: [
+//               { type: "LABEL_DETECTION", maxResults: 10 },
+//               { type: "TEXT_DETECTION", maxResults: 5 },
+//               // Add more feature types as needed
+//             ],
+//             image: {
+//               content: base64ImageData,
+//             },
+//           },
+//         ],
+//       };
+
+//       const response = await axios.post(
+//         `https://vision.googleapis.com/v1/images:annotate?key=${process.env.EXPO_PUBLIC_GOOGLE_CLOUD_VISION_API_KEY}`,
+//         requestData,
+//         {
+//           headers: {
+//             Accept: "application/json",
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
+
+//       setGoogleResponse(response.data);
+//       console.log("response: ", response.data);
+//     } catch (error) {
+//       console.log("Error recognizing text:", error);
+//       setRecognizedText("Error recognizing text.");
+//     }
+//   };
+
+//   const uploadImageToFirebase = async () => {
+//     try {
+//       const response = await fetch(image);
+//       const blob = await response.blob();
+//       const ref = firebase
+//         .storage()
+//         .ref()
+//         .child(`images/${new Date().toISOString()}`);
+//       await ref.put(blob);
+//       console.log("Image uploaded to Firebase!");
+//     } catch (error) {
+//       console.error("Error uploading image to Firebase:", error);
+//     }
+//   };
+
 //   const takePicture = async () => {
 //     if (isCameraReady && cameraRef.current) {
 //       try {
 //         const photo = await cameraRef.current.takePictureAsync();
+
 //         setImage(photo.uri);
 //         processImage(photo.uri);
+//         console.log("fnknsdnknl: ", photo.uri);
 //         setShowCamera(false);
 //       } catch (error) {
-//         console.log('Error taking picture:', error);
+//         console.log("Error taking picture:", error);
 //       }
 //     } else {
-//       console.log('Camera is not ready');
+//       console.log("Camera is not ready");
 //     }
 //   };
 
@@ -71,9 +335,10 @@
 //       quality: 1,
 //     });
 
-//     if (!result.cancelled) {
-//       setImage(result.uri);
-//       processImage(result.uri);
+//     if (!result.canceled) {
+//       console.log("3:", result.assets[0].uri);
+//       setImage(result.assets[0].uri);
+//       processImage(result.assets[0].uri);
 //       setShowCamera(false); // Hide the camera view after picking an image
 //     }
 //   };
@@ -86,28 +351,9 @@
 //     );
 //   };
 
-//   const processImage = async (uri) => {
-//     try {
-//       const tesseractOptions = {};
-//       const recognizedText = await RNTesseractOcr.recognize(
-//         uri,
-//         'LANG_ENGLISH',
-//         tesseractOptions
-//       );
-
-//       if (recognizedText) {
-//         setRecognizedText(recognizedText);
-//       }
-//     } catch (error) {
-
-//       console.log('Error recognizing text:', error);
-//       setRecognizedText('Error recognizing text.');
-//     }
-//   };
-
 //   const takeAgain = () => {
 //     setImage(null);
-//     setRecognizedText('');
+//     setRecognizedText("");
 //     setShowCamera(true);
 //   };
 
@@ -140,8 +386,18 @@
 //           </TouchableOpacity>
 //         </View>
 //       )}
-//       {/* Display recognized text */}
-//       {recognizedText !== '' && <Text>{recognizedText}</Text>}
+//       {googleResposne && (
+//         <View style={styles.imagePreviewContainer}>
+//           <FlatList
+//             data={google.responses}
+//             renderItem={({ item }) => (
+//               <Text style={styles.responseText}>{JSON.stringify(item)}</Text>
+//             )}
+//             keyExtractor={(item, index) => index.toString()}
+//           />
+//         </View>
+//       )}
+
 //       {/* Switch camera button */}
 //       <TouchableOpacity
 //         style={styles.switchCameraButton}
@@ -162,10 +418,10 @@
 //   },
 //   buttonContainer: {
 //     flex: 1,
-//     backgroundColor: 'transparent',
-//     flexDirection: 'row',
-//     justifyContent: 'center',
-//     alignItems: 'flex-end',
+//     backgroundColor: "transparent",
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     alignItems: "flex-end",
 //     marginBottom: 20,
 //   },
 //   button: {
@@ -178,29 +434,34 @@
 //     flex: 1,
 //   },
 //   takeAgainButton: {
-//     position: 'absolute',
+//     position: "absolute",
 //     bottom: 20,
-//     alignSelf: 'center',
-//     backgroundColor: '#fff',
+//     alignSelf: "center",
+//     backgroundColor: "#fff",
 //     paddingVertical: 10,
 //     paddingHorizontal: 20,
 //     borderRadius: 5,
 //   },
 //   takeAgainText: {
-//     color: 'blue',
-//     fontWeight: 'bold',
+//     color: "blue",
+//     fontWeight: "bold",
 //   },
 //   switchCameraButton: {
-//     position: 'absolute',
+//     position: "absolute",
 //     top: 20,
 //     right: 20,
-//     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+//     backgroundColor: "rgba(0, 0, 0, 0.5)",
 //     borderRadius: 30,
 //     padding: 10,
 //   },
 // });
 
-import React, { useState, useEffect, useRef } from "react";
+//FREE OCR API LOGIC
+import { firebase } from "../config/firebase";
+import * as FileSystem from "expo-file-system";
+import * as ImageManipulator from "expo-image-manipulator";
+import colors from "../utils/colors";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
   Button,
@@ -211,12 +472,9 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Camera, AutoFocus } from "expo-camera";
-import { RNTesseractOcr } from "react-native-tesseract-ocr";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
-import axios from "axios";
-import * as FileSystem from "expo-file-system";
-
+import { performOCR } from "../utils/ocr"; // Assuming this is correctly imported
 export default function CameraComponent() {
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
@@ -226,89 +484,24 @@ export default function CameraComponent() {
   const [showCamera, setShowCamera] = useState(false);
   const cameraRef = useRef(null);
   const isFocused = useIsFocused();
-
-
   const requestPermissions = async () => {
     try {
       const { status } =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status === "granted") {
         setHasCameraPermission(true);
+        setShowCamera(true);
       }
     } catch (error) {
       console.log("Error requesting media library permissions:", error);
     }
-
     try {
       const { status } = await Camera.requestCameraPermissionsAsync();
       if (status === "granted") {
         setHasCameraPermission(true);
-        setShowCamera(true);
       }
     } catch (error) {
       console.log("Error requesting camera permissions:", error);
-    }
-  };
-
-  useEffect(() => {
-    requestPermissions();
-  }, []);
-
-  const processImageWithGoogleVision = async (image) => {
-    try {
-      if (!image) {
-        alert("Please select an image first.");
-        return;
-      }
-
-      const apiKey = 'AIzaSyDXgy5w3UrpiwmPropG80pgWj95-prazNs'; // Replace with your Google Cloud Vision API key
-      const apiURL = `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`;
-      const base64ImageData = FileSystem.readAsStringAsync(image, {
-        encoding: FileSystem.EncodingType.Base64,
-      });
-
-      const requestData = {
-        image: {
-          content: base64ImageData,
-        },
-        features: [
-          {
-            type: "TEXT_DETECTION",
-            maxResults: 1,
-          },
-        ],
-      };
-      const apiResponse = await axios.post(apiURL, requestData);
-      setLabels(apiResponse.data.responses[0].textAnnotations[0].description);
-    } catch (error) {
-      console.log("Error recognizing text with Google Vision API:", error);
-      setRecognizedText("Error recognizing text.");
-    }
-  };
-
-  const processImage = async (uri) => {
-    try {
-      await processImageWithGoogleVision(uri);
-    } catch (error) {
-      console.log("Error processing image:", error);
-      setRecognizedText("Error recognizing text.");
-    }
-  };
-
-  const takePicture = async () => {
-    if (isCameraReady && cameraRef.current) {
-      try {
-        const photo = await cameraRef.current.takePictureAsync();
-
-        setImage(photo.uri);
-        processImage(photo.uri);
-        console.log("fnknsdnknl: ", photo.uri);
-        setShowCasmera(false);
-      } catch (error) {
-        console.log("Error taking picture:", error);
-      }
-    } else {
-      console.log("Camera is not ready");
     }
   };
 
@@ -320,11 +513,27 @@ export default function CameraComponent() {
       quality: 1,
     });
 
-    if (!result.canceled) {
-      console.log("3:", result.assets[0].uri);
-      setImage(result.assets[0].uri);
-      processImage(result.assets[0].uri);
-      setShowCamera(false); // Hide the camera view after picking an image
+    if (!result.cancelled) {
+      setImage(result.uri);
+      processImage(result.uri);
+      setShowCamera(false);
+    }
+  };
+
+  const takePicture = async () => {
+    if (isCameraReady && cameraRef.current) {
+      try {
+        const photo = await cameraRef.current.takePictureAsync();
+        setImage(photo.uri);
+        // console.log("photo.uri_________________: ", image)
+        processImage(photo.uri);
+        // console.log("photo.uri_________________: ", photo.uri);
+        setShowCamera(false);
+      } catch (error) {
+        console.log("Error taking picture:", error);
+      }
+    } else {
+      console.log("Camera is not ready");
     }
   };
 
@@ -336,31 +545,109 @@ export default function CameraComponent() {
     );
   };
 
-  // const processImage = async (uri) => {
-  //   try {
-  //     console.log("ifff")
-  //     const processed = await MlkitOcr.detectFromFile(uri);
-  //     console.log('Processed: Elsee', processed);
-
-  //     if (processed && processed.text) {
-  //       const recognizedText = processed.text;
-  //       console.log('Recognized Text:', recognizedText);
-  //       setRecognizedText(recognizedText);
-  //     } else {
-  //       console.log('Text not found or processed object is invalid.');
-  //       setRecognizedText('Error recognizing text.');
-  //     }
-  //   } catch (error) {
-  //     console.log('Error recognizing text:', error);
-  //     setRecognizedText('Error recognizing text.');
-  //   }
-  // };
-
   const takeAgain = () => {
     setImage(null);
     setRecognizedText("");
     setShowCamera(true);
   };
+
+  const MAX_IMAGE_SIZE = 1024 * 1024;
+  const checkAndResizeImage = async (imageUri) => {
+    try {
+      const fileInfo = await FileSystem.getInfoAsync(imageUri);
+      if (!fileInfo || !fileInfo.uri) {
+        throw new Error("Invalid file information");
+      }
+      const { size } = fileInfo.uri;
+      if (size < MAX_IMAGE_SIZE) {
+        return imageUri;
+      }
+      const resizedImage = await ImageManipulator.manipulateAsync(
+        imageUri,
+        [{ resize: { width: 800 } }],
+        { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
+      );
+      return resizedImage.uri;
+    } catch (error) {
+      console.log("Error checking and resizing image:", error);
+      throw new Error("Error checking and resizing image: " + error.message);
+    }
+  };
+
+  const uploadImageToFirebase = async (imageUri) => {
+    try {
+      const fileInfo = await FileSystem.getInfoAsync(imageUri);
+      if (!fileInfo || !fileInfo.uri) {
+        throw new Error("Invalid file information");
+      }
+      const uri = fileInfo.uri;
+
+      // console.log("URI: ", uri);
+
+      const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+        xhr.onerror = (e) => {
+          reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", uri, true);
+        xhr.send(null);
+      });
+
+      const filename = uri.substring(uri.lastIndexOf("/") + 1);
+      console.log("Filename: ", filename);
+      const ref = firebase.storage().ref().child(`images/${filename}`);
+
+      const snapshot = await ref.put(blob);
+
+      blob.close();
+      console.log("Image uploaded to Firebase!");
+
+      const imageURL = await ref.getDownloadURL();
+      console.log("Image URL: ", imageURL);
+      return imageURL;
+    } catch (error) {
+      console.log("Error uploading image to Firebase Storage:", error);
+      throw new Error(
+        "Error uploading image to Firebase Storage: " + error.message
+      );
+    }
+  };
+
+  const processImage = async (uri) => {
+    try {
+      const resizedImageUri = await checkAndResizeImage(uri);
+      const uploadedImageUrl = await uploadImageToFirebase(resizedImageUri);
+      const result = await performOCR(uploadedImageUrl);
+
+      console.log("result__________________________________________: ", result);
+      const parsedText = result.ParsedResults[0]?.ParsedText;
+      const ErrorMessage = result.ParsedResults[0]?.ErrorMessage;
+      if (parsedText && parsedText.length > 0) {
+        setRecognizedText(parsedText);
+        console.log("parsedText: ", parsedText);
+      } else {
+        setRecognizedText("No text found.");
+      }
+
+      if (ErrorMessage && ErrorMessage.length > 0) {
+        setRecognizedText(ErrorMessage[0]);
+      }
+    } catch (error) {
+      console.log("Error recognizing text:", error);
+      setRecognizedText("Error recognizing text.");
+    }
+  };
+  const copyToClipboard = useCallback(async () => {
+    await Clipboard.setStringAsync(recognizedText);
+  }, [recognizedText]);
+
+  useEffect(() => {
+    requestPermissions();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -382,18 +669,39 @@ export default function CameraComponent() {
           </View>
         </Camera>
       )}
-      {/* Display captured image */}
+
       {image && (
         <View style={styles.imagePreviewContainer}>
           <Image source={{ uri: image }} style={styles.imagePreview} />
+
           <TouchableOpacity style={styles.takeAgainButton} onPress={takeAgain}>
             <Text style={styles.takeAgainText}>Take Again</Text>
           </TouchableOpacity>
+
         </View>
       )}
-      {/* Display recognized text */}
-      {recognizedText !== "" && <Text>{recognizedText}</Text>}
-      {/* Switch camera button */}
+      { (
+        <View style={styles.resultContainer}>
+          <Text style={styles.recognizedText}>{recognizedText}</Text>
+
+          <TouchableOpacity
+            style={styles.iconContainer}
+            disabled={recognizedText === ""}
+            onPress={copyToClipboard}
+          >
+            <MaterialIcons
+              name="content-copy"
+              size={24}
+              color={
+                recognizedText !== ""
+                  ? colors.textColor
+                  : colors.textColorDisabled
+              }
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+
       <TouchableOpacity
         style={styles.switchCameraButton}
         onPress={switchCameraType}
@@ -426,19 +734,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imagePreview: {
-    flex: 1,
-  },
+    flex: 1
+    },
   takeAgainButton: {
     position: "absolute",
     bottom: 20,
     alignSelf: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "lightblue",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
   takeAgainText: {
     color: "blue",
+    fontWeight: "bold",
+  },
+  iconContainer: {
+    paddingHorizontal: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  recognizedText: {
+    alignSelf: "center",
+    marginVertical: 10,
+    fontSize: 16,
     fontWeight: "bold",
   },
   switchCameraButton: {
@@ -448,5 +767,19 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 30,
     padding: 10,
+  },
+  recognizedText: {
+    fontFamily: "regular",
+    letterSpacing: 0.3,
+    color: colors.primary,
+    flex: 1,
+    marginHorizontal: 20,
+  },
+  resultContainer: {
+    borderBottomColor: colors.lightGrey,
+    borderBottomWidth: 1,
+    flexDirection: "row",
+    height: 90,
+    paddingVertical: 15,
   },
 });

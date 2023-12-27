@@ -1,21 +1,12 @@
-
-
 from flask import Flask, request, jsonify
 from gradio_client import Client
 # from flask_cors import CORS
 from lan import LANGS
 
-
-
 app = Flask(__name__)
 
-
-
-
-
-
 # Initialize Gradio client
-client = Client("https://debanga-lang-app.hf.space/--replicas/hn5zg")
+client = Client("https://debanga-lang-app.hf.space/--replicas/s8sbp/")
 
 # Enable CORS for a specific route
 # CORS(app, resources={r"/translate": {"origins": "http://192.168.1.4:19000"}})
@@ -38,10 +29,6 @@ def translate():
         print(source_language)
         print(target_language)
 
-
-
-
-
         # Perform translation using Gradio client
         result = client.predict(
             source_language,
@@ -58,4 +45,4 @@ def translate():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False, port=5000)
+    app.run(host='0.0.0.0', debug=False, port=5005)
