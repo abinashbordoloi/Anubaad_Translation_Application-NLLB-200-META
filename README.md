@@ -22,8 +22,9 @@ Anubad is an application that simplifies language translation tasks, enabling us
 
 ## Features
 
-- **Simple Translation**: Enter text in one language and get the translated text in your preferred language.
+- **Simple Translation**: Enter text in one language and get the translated text in Assamese.
 - **Multilingual Support**: Supports translation between a wide range of languages.
+- **Supports Easy OCR Translation**: Extract text from images, files, or photos using OCR and translate to Assamese.
 - **User-Friendly Interface**: Intuitive design for easy navigation and usage.
 - **Offline Mode**: Save favorite translations for offline access.
 - **History**: View translation history for reference.
