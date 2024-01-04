@@ -5,7 +5,7 @@
 ![Anubad Logo](app/assets/splashscreenA.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Contributors](https://img.shields.io/github/contributors/your-username/repo-name.svg)](https://github.com/your-username/repo-name/graphs/contributors)
+[![Contributors](https://img.shields.io/github/contributors/your-username/repo-name.svg)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/graphs/contributors)
 [![Issues](https://img.shields.io/github/issues/your-username/repo-name.svg)](https://github.com/your-username/repo-name/issues)
 
 Anubad is an application that simplifies language translation tasks, enabling users to effortlessly translate text between multiple languages.
