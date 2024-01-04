@@ -5,10 +5,10 @@
 ![Anubad Logo](app/assets/splashscreenA.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Contributors](https://img.shields.io/github/contributors/abinashbordoloi/repo-name.svg)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/graphs/contributors)
-[![Issues](https://img.shields.io/github/issues/abinashbordoloi/repo-name.svg)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/issues)
-[![Forks](https://img.shields.io/github/forks/abinashbordoloi/repo-name.svg?style=social)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/network/members)
-[![Stars](https://img.shields.io/github/stars/abinashbordoloi/repo-name.svg?style=social)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/stargazers)
+[![Contributors](https://img.shields.io/github/contributors/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META.svg)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/graphs/contributors)
+[![Issues](https://img.shields.io/github/issues/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META.svg)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/issues)
+[![Forks](https://img.shields.io/github/forks/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-METAe.svg?style=social)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/network/members)
+[![Stars](https://img.shields.io/github/stars/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META.svg?style=social)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/stargazers)
 
 
 Anubad is an application that simplifies language translation tasks, enabling users to effortlessly translate text between multiple languages.
