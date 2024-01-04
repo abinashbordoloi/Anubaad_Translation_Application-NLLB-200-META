@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributors](https://img.shields.io/github/contributors/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META.svg)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/graphs/contributors)
 [![Issues](https://img.shields.io/github/issues/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META.svg)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/issues)
-[![Forks](https://img.shields.io/github/forks/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-METAe.svg?style=social)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/network/members)
+[![Forks](https://img.shields.io/github/forks/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META.svg?style=social)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/network/members)
 [![Stars](https://img.shields.io/github/stars/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META.svg?style=social)](https://github.com/abinashbordoloi/Anubaad_Translation_Application-NLLB-200-META/stargazers)
 
 
