@@ -1,7 +1,7 @@
 # Anubaad_Translation_Application-NLLB-200-META
 # Anubad
 
-![Anubad Logo](link-to-your-logo.png)
+![Anubad Logo](app/assets/splashscreenA.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributors](https://img.shields.io/github/contributors/your-username/repo-name.svg)](https://github.com/your-username/repo-name/graphs/contributors)
