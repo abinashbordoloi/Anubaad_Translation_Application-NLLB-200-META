@@ -1,5 +1,6 @@
-# Anubaad_Translation_Application-NLLB-200-META
-# Anubad
+# Anubaad a Translation_Application for Assamese Language
+## Powered by NLLB-200 transformer model from META-AI
+
 
 ![Anubad Logo](app/assets/splashscreenA.png)
 
