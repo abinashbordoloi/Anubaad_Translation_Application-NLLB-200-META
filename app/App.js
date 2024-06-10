@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./screens/HomeScreen";
+import DictionaryScreen from "./screens/DictionaryScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import SavedScreen from "./screens/SavedScreen";
 import CameraOcrScreen from "./screens/CameraScreen";
@@ -56,6 +57,17 @@ const TabNavigator = () => {
           tabBarLabel: "Settings",
           tabBarIcon: (props) => (
             <Ionicons name="settings" size={props.size} color={props.color} />
+          ),
+        }}
+      />
+
+<Tab.Screen
+        name="Dictionary"
+        component={DictionaryScreen}
+        options={{
+          tabBarLabel: "Look Up",
+          tabBarIcon: (props) => (
+            <Ionicons name="book" size={props.size} color={props.color} />
           ),
         }}
       />

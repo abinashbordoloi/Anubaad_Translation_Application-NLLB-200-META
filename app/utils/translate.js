@@ -7,7 +7,7 @@ export const translate = async (languageFrom, languageTo,text) => {
     console.log(languageFrom, languageTo, text);
     console.log(typeof(text), typeof(languageFrom), typeof(languageTo));
     try {
-        const response = await axios.post('http://192.168.1.4:5000/translate', {
+        const response = await axios.post('http://127.0.0.1:5000/translate', {
             sourceLanguage: languageFrom,
             targetLanguage: languageTo,
             inputText: text
