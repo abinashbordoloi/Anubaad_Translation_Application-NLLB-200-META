@@ -71,7 +71,7 @@ const TabNavigator = () => {
           ),
         }}
       />
-
+{/* 
 <Tab.Screen
         name="CameraOCR"
         component={CameraOcrScreen}
@@ -81,7 +81,7 @@ const TabNavigator = () => {
             <Entypo name="camera" size={props.size} color={props.color} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
