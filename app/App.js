@@ -6,7 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import DictionaryScreen from "./screens/DictionaryScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import SavedScreen from "./screens/SavedScreen";
-import CameraOcrScreen from "./screens/CameraScreen";
+import CameraScreen from "./screens/CameraScreen"
 import LanguageSelectScreen from "./screens/LanguageSelectScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, Ionicons } from "@expo/vector-icons";
@@ -18,8 +18,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
 import store from "./store/store";
 
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// AsyncStorage.clear();
 
 SplashScreen.preventAutoHideAsync();
 
@@ -71,17 +69,17 @@ const TabNavigator = () => {
           ),
         }}
       />
-{/* 
+
 <Tab.Screen
         name="CameraOCR"
-        component={CameraOcrScreen}
+        component={CameraScreen}
         options={{
           tabBarLabel: "Camera OCR",
           tabBarIcon: (props) => (
             <Entypo name="camera" size={props.size} color={props.color} />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };

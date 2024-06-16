@@ -1,460 +1,4 @@
-// // import React, { useState, useEffect, useRef } from 'react';
-// // import {
-// //   View,
-// //   Button,
-// //   Image,
-// //   Text,
-// //   StyleSheet,
-// //   TouchableOpacity,
-// // } from 'react-native';
-// // import * as ImagePicker from 'expo-image-picker';
-// // import { Camera, AutoFocus } from 'expo-camera';
-// // import { RNTesseractOcr } from 'react-native-tesseract-ocr';
-// // import { MaterialIcons } from '@expo/vector-icons';
-// // import { useIsFocused } from '@react-navigation/native';
 
-// // export default function CameraComponent() {
-// //   const [hasCameraPermission, setHasCameraPermission] = useState(false);
-// //   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
-// //   const [image, setImage] = useState(null);
-// //   const [recognizedText, setRecognizedText] = useState('');
-// //   const [isCameraReady, setIsCameraReady] = useState(false);
-// //   const [showCamera, setShowCamera] = useState(false);
-// //   const cameraRef = useRef(null);
-// //   const isFocused = useIsFocused();
-
-// //   const requestPermissions = async () => {
-// //     try {
-// //       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-// //       if (status === 'granted') {
-// //         setHasCameraPermission(true);
-// //       }
-// //     } catch (error) {
-// //       console.log('Error requesting media library permissions:', error);
-// //     }
-
-// //     try {
-// //       const { status } = await Camera.requestCameraPermissionsAsync();
-// //       if (status === 'granted') {
-// //         setHasCameraPermission(true);
-// //         setShowCamera(true);
-// //       }
-// //     } catch (error) {
-// //       console.log('Error requesting camera permissions:', error);
-// //     }
-// //   };
-
-// //   useEffect(() => {
-// //     requestPermissions();
-// //   }, []);
-
-// //   const takePicture = async () => {
-// //     if (isCameraReady && cameraRef.current) {
-// //       try {
-// //         const photo = await cameraRef.current.takePictureAsync();
-// //         setImage(photo.uri);
-// //         processImage(photo.uri);
-// //         setShowCamera(false);
-// //       } catch (error) {
-// //         console.log('Error taking picture:', error);
-// //       }
-// //     } else {
-// //       console.log('Camera is not ready');
-// //     }
-// //   };
-
-// //   const pickImage = async () => {
-// //     let result = await ImagePicker.launchImageLibraryAsync({
-// //       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-// //       allowsEditing: true,
-// //       aspect: [4, 3],
-// //       quality: 1,
-// //     });
-
-// //     if (!result.cancelled) {
-// //       setImage(result.uri);
-// //       processImage(result.uri);
-// //       setShowCamera(false); // Hide the camera view after picking an image
-// //     }
-// //   };
-
-// //   const switchCameraType = () => {
-// //     setCameraType(
-// //       cameraType === Camera.Constants.Type.back
-// //         ? Camera.Constants.Type.front
-// //         : Camera.Constants.Type.back
-// //     );
-// //   };
-
-// //   const processImage = async (uri) => {
-// //     try {
-// //       const tesseractOptions = {};
-// //       const recognizedText = await RNTesseractOcr.recognize(
-// //         uri,
-// //         'LANG_ENGLISH',
-// //         tesseractOptions
-// //       );
-
-// //       if (recognizedText) {
-// //         setRecognizedText(recognizedText);
-// //       }
-// //     } catch (error) {
-
-// //       console.log('Error recognizing text:', error);
-// //       setRecognizedText('Error recognizing text.');
-// //     }
-// //   };
-
-// //   const takeAgain = () => {
-// //     setImage(null);
-// //     setRecognizedText('');
-// //     setShowCamera(true);
-// //   };
-
-// //   return (
-// //     <View style={styles.container}>
-// //       {showCamera && isFocused && hasCameraPermission && (
-// //         <Camera
-// //           style={styles.camera}
-// //           type={cameraType}
-// //           ref={cameraRef}
-// //           autoFocus={AutoFocus.on}
-// //           onCameraReady={() => setIsCameraReady(true)}
-// //         >
-// //           <View style={styles.buttonContainer}>
-// //             <View style={styles.button}>
-// //               <Button title="Take Picture" onPress={takePicture} />
-// //             </View>
-// //             <View style={styles.button}>
-// //               <Button title="Pick Image" onPress={pickImage} />
-// //             </View>
-// //           </View>
-// //         </Camera>
-// //       )}
-// //       {/* Display captured image */}
-// //       {image && (
-// //         <View style={styles.imagePreviewContainer}>
-// //           <Image source={{ uri: image }} style={styles.imagePreview} />
-// //           <TouchableOpacity style={styles.takeAgainButton} onPress={takeAgain}>
-// //             <Text style={styles.takeAgainText}>Take Again</Text>
-// //           </TouchableOpacity>
-// //         </View>
-// //       )}
-// //       {/* Display recognized text */}
-// //       {recognizedText !== '' && <Text>{recognizedText}</Text>}
-// //       {/* Switch camera button */}
-// //       <TouchableOpacity
-// //         style={styles.switchCameraButton}
-// //         onPress={switchCameraType}
-// //       >
-// //         <MaterialIcons name="switch-camera" size={24} color="white" />
-// //       </TouchableOpacity>
-// //     </View>
-// //   );
-// // }
-
-// // const styles = StyleSheet.create({
-// //   container: {
-// //     flex: 1,
-// //   },
-// //   camera: {
-// //     flex: 1,
-// //   },
-// //   buttonContainer: {
-// //     flex: 1,
-// //     backgroundColor: 'transparent',
-// //     flexDirection: 'row',
-// //     justifyContent: 'center',
-// //     alignItems: 'flex-end',
-// //     marginBottom: 20,
-// //   },
-// //   button: {
-// //     margin: 10,
-// //   },
-// //   imagePreviewContainer: {
-// //     flex: 1,
-// //   },
-// //   imagePreview: {
-// //     flex: 1,
-// //   },
-// //   takeAgainButton: {
-// //     position: 'absolute',
-// //     bottom: 20,
-// //     alignSelf: 'center',
-// //     backgroundColor: '#fff',
-// //     paddingVertical: 10,
-// //     paddingHorizontal: 20,
-// //     borderRadius: 5,
-// //   },
-// //   takeAgainText: {
-// //     color: 'blue',
-// //     fontWeight: 'bold',
-// //   },
-// //   switchCameraButton: {
-// //     position: 'absolute',
-// //     top: 20,
-// //     right: 20,
-// //     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-// //     borderRadius: 30,
-// //     padding: 10,
-// //   },
-// // });
-
-// //GOOGLE VISION API LOGIC
-// import React, { useState, useEffect, useRef } from "react";
-// import {
-//   View,
-//   Button,
-//   Image,
-//   Text,
-//   StyleSheet,
-//   TouchableOpacity,
-//   FlatList,
-// } from "react-native";
-// import * as ImagePicker from "expo-image-picker";
-// import { Camera, AutoFocus } from "expo-camera";
-// import { MaterialIcons } from "@expo/vector-icons";
-// import { useIsFocused } from "@react-navigation/native";
-// import axios from "axios";
-// import * as FileSystem from "expo-file-system";
-
-// export default function CameraComponent() {
-//   const [hasCameraPermission, setHasCameraPermission] = useState(false);
-//   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
-//   const [image, setImage] = useState(null);
-//   const [recognizedText, setRecognizedText] = useState("");
-//   const [googleResposne, setGoogleResponse] = useState(null);
-//   const [isCameraReady, setIsCameraReady] = useState(false);
-//   const [showCamera, setShowCamera] = useState(false);
-//   const cameraRef = useRef(null);
-//   const isFocused = useIsFocused();
-
-//   const requestPermissions = async () => {
-//     try {
-//       const { status } =
-//         await ImagePicker.requestMediaLibraryPermissionsAsync();
-//       if (status === "granted") {
-//         setHasCameraPermission(true);
-//       }
-//     } catch (error) {
-//       console.log("Error requesting media library permissions:", error);
-//     }
-
-//     try {
-//       const { status } = await Camera.requestCameraPermissionsAsync();
-//       if (status === "granted") {
-//         setHasCameraPermission(true);
-//         setShowCamera(true);
-//       }
-//     } catch (error) {
-//       console.log("Error requesting camera permissions:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     requestPermissions();
-//   }, []);
-
-//   const processImage = async (uri) => {
-//     try {
-//       const base64ImageData = await FileSystem.readAsStringAsync(uri, {
-//         encoding: FileSystem.EncodingType.Base64,
-//       });
-
-//       const requestData = {
-//         requests: [
-//           {
-//             features: [
-//               { type: "LABEL_DETECTION", maxResults: 10 },
-//               { type: "TEXT_DETECTION", maxResults: 5 },
-//               // Add more feature types as needed
-//             ],
-//             image: {
-//               content: base64ImageData,
-//             },
-//           },
-//         ],
-//       };
-
-//       const response = await axios.post(
-//         `https://vision.googleapis.com/v1/images:annotate?key=${process.env.EXPO_PUBLIC_GOOGLE_CLOUD_VISION_API_KEY}`,
-//         requestData,
-//         {
-//           headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-//       setGoogleResponse(response.data);
-//       console.log("response: ", response.data);
-//     } catch (error) {
-//       console.log("Error recognizing text:", error);
-//       setRecognizedText("Error recognizing text.");
-//     }
-//   };
-
-//   const uploadImageToFirebase = async () => {
-//     try {
-//       const response = await fetch(image);
-//       const blob = await response.blob();
-//       const ref = firebase
-//         .storage()
-//         .ref()
-//         .child(`images/${new Date().toISOString()}`);
-//       await ref.put(blob);
-//       console.log("Image uploaded to Firebase!");
-//     } catch (error) {
-//       console.error("Error uploading image to Firebase:", error);
-//     }
-//   };
-
-//   const takePicture = async () => {
-//     if (isCameraReady && cameraRef.current) {
-//       try {
-//         const photo = await cameraRef.current.takePictureAsync();
-
-//         setImage(photo.uri);
-//         processImage(photo.uri);
-//         console.log("fnknsdnknl: ", photo.uri);
-//         setShowCamera(false);
-//       } catch (error) {
-//         console.log("Error taking picture:", error);
-//       }
-//     } else {
-//       console.log("Camera is not ready");
-//     }
-//   };
-
-//   const pickImage = async () => {
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//       allowsEditing: true,
-//       aspect: [4, 3],
-//       quality: 1,
-//     });
-
-//     if (!result.canceled) {
-//       console.log("3:", result.assets[0].uri);
-//       setImage(result.assets[0].uri);
-//       processImage(result.assets[0].uri);
-//       setShowCamera(false); // Hide the camera view after picking an image
-//     }
-//   };
-
-//   const switchCameraType = () => {
-//     setCameraType(
-//       cameraType === Camera.Constants.Type.back
-//         ? Camera.Constants.Type.front
-//         : Camera.Constants.Type.back
-//     );
-//   };
-
-//   const takeAgain = () => {
-//     setImage(null);
-//     setRecognizedText("");
-//     setShowCamera(true);
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       {showCamera && isFocused && hasCameraPermission && (
-//         <Camera
-//           style={styles.camera}
-//           type={cameraType}
-//           ref={cameraRef}
-//           autoFocus={AutoFocus.on}
-//           onCameraReady={() => setIsCameraReady(true)}
-//         >
-//           <View style={styles.buttonContainer}>
-//             <View style={styles.button}>
-//               <Button title="Take Picture" onPress={takePicture} />
-//             </View>
-//             <View style={styles.button}>
-//               <Button title="Pick Image" onPress={pickImage} />
-//             </View>
-//           </View>
-//         </Camera>
-//       )}
-//       {/* Display captured image */}
-//       {image && (
-//         <View style={styles.imagePreviewContainer}>
-//           <Image source={{ uri: image }} style={styles.imagePreview} />
-//           <TouchableOpacity style={styles.takeAgainButton} onPress={takeAgain}>
-//             <Text style={styles.takeAgainText}>Take Again</Text>
-//           </TouchableOpacity>
-//         </View>
-//       )}
-//       {googleResposne && (
-//         <View style={styles.imagePreviewContainer}>
-//           <FlatList
-//             data={google.responses}
-//             renderItem={({ item }) => (
-//               <Text style={styles.responseText}>{JSON.stringify(item)}</Text>
-//             )}
-//             keyExtractor={(item, index) => index.toString()}
-//           />
-//         </View>
-//       )}
-
-//       {/* Switch camera button */}
-//       <TouchableOpacity
-//         style={styles.switchCameraButton}
-//         onPress={switchCameraType}
-//       >
-//         <MaterialIcons name="switch-camera" size={24} color="white" />
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   camera: {
-//     flex: 1,
-//   },
-//   buttonContainer: {
-//     flex: 1,
-//     backgroundColor: "transparent",
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "flex-end",
-//     marginBottom: 20,
-//   },
-//   button: {
-//     margin: 10,
-//   },
-//   imagePreviewContainer: {
-//     flex: 1,
-//   },
-//   imagePreview: {
-//     flex: 1,
-//   },
-//   takeAgainButton: {
-//     position: "absolute",
-//     bottom: 20,
-//     alignSelf: "center",
-//     backgroundColor: "#fff",
-//     paddingVertical: 10,
-//     paddingHorizontal: 20,
-//     borderRadius: 5,
-//   },
-//   takeAgainText: {
-//     color: "blue",
-//     fontWeight: "bold",
-//   },
-//   switchCameraButton: {
-//     position: "absolute",
-//     top: 20,
-//     right: 20,
-//     backgroundColor: "rgba(0, 0, 0, 0.5)",
-//     borderRadius: 30,
-//     padding: 10,
-//   },
-// });
 
 //FREE OCR API LOGIC
 import { firebase } from "../config/firebase";
@@ -462,20 +6,23 @@ import * as FileSystem from "expo-file-system";
 import * as ImageManipulator from "expo-image-manipulator";
 import colors from "../utils/colors";
 import React, { useState, useEffect, useCallback, useRef } from "react";
+
 import {
   View,
   Button,
   Image,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  TouchableOpacity, 
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Camera, AutoFocus } from "expo-camera";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import { performOCR } from "../utils/ocr"; // Assuming this is correctly imported
-export default function CameraComponent() {
+
+
+export default function CameraScreen() {
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [image, setImage] = useState(null);
@@ -486,6 +33,8 @@ export default function CameraComponent() {
   const isFocused = useIsFocused();
   const requestPermissions = async () => {
     try {
+      console.log(Camera.Constants);
+
       const { status } =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status === "granted") {
@@ -712,6 +261,7 @@ export default function CameraComponent() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -783,3 +333,4 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 });
+

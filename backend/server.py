@@ -1,198 +1,82 @@
 from flask import Flask, request, jsonify
 from gradio_client import Client, handle_file
-# from flask_cors import CORS
+from flask_cors import CORS
 from lan import LANGS, LANGS2
 import tempfile
 import traceback
 import requests
+from ai4bharat.transliteration import XlitEngine
 
 
-# LANGS2= {
-#     "afr": "Afrikaans",
-#     "amh": "Amharic",
-#     "arb": "Modern Standard Arabic",
-#     "ary": "Moroccan Arabic",
-#     "arz": "Egyptian Arabic",
-#     "asm": "Assamese",
-#     "ast": "Asturian",
-#     "azj": "North Azerbaijani",
-#     "bel": "Belarusian",
-#     "ben": "Bengali",
-#     "bos": "Bosnian",
-#     "bul": "Bulgarian",
-#     "cat": "Catalan",
-#     "ceb": "Cebuano",
-#     "ces": "Czech",
-#     "ckb": "Central Kurdish",
-#     "cmn": "Mandarin Chinese",
-#     "cym": "Welsh",
-#     "dan": "Danish",
-#     "deu": "German",
-#     "ell": "Greek",
-#     "eng": "English",
-#     "est": "Estonian",
-#     "eus": "Basque",
-#     "fin": "Finnish",
-#     "fra": "French",
-#     "gaz": "West Central Oromo",
-#     "gle": "Irish",
-#     "glg": "Galician",
-#     "guj": "Gujarati",
-#     "heb": "Hebrew",
-#     "hin": "Hindi",
-#     "hrv": "Croatian",
-#     "hun": "Hungarian",
-#     "hye": "Armenian",
-#     "ibo": "Igbo",
-#     "ind": "Indonesian",
-#     "isl": "Icelandic",
-#     "ita": "Italian",
-#     "jav": "Javanese",
-#     "jpn": "Japanese",
-#     "kam": "Kamba",
-#     "kan": "Kannada",
-#     "kat": "Georgian",
-#     "kaz": "Kazakh",
-#     "kea": "Kabuverdianu",
-#     "khk": "Halh Mongolian",
-#     "khm": "Khmer",
-#     "kir": "Kyrgyz",
-#     "kor": "Korean",
-#     "lao": "Lao",
-#     "lit": "Lithuanian",
-#     "ltz": "Luxembourgish",
-#     "lug": "Ganda",
-#     "luo": "Luo",
-#     "lvs": "Standard Latvian",
-#     "mai": "Maithili",
-#     "mal": "Malayalam",
-#     "mar": "Marathi",
-#     "mkd": "Macedonian",
-#     "mlt": "Maltese",
-#     "mni": "Meitei",
-#     "mya": "Burmese",
-#     "nld": "Dutch",
-#     "nno": "Norwegian Nynorsk",
-#     "nob": "Norwegian Bokm\u00e5l",
-#     "npi": "Nepali", 
-#     "nya": "Nyanja",
-#     "oci": "Occitan",
-#     "ory": "Odia",
-#     "pan": "Punjabi",
-#     "pbt": "Southern Pashto",
-#     "pes": "Western Persian",
-#     "pol": "Polish",
-#     "por": "Portuguese",
-#     "ron": "Romanian",
-#     "rus": "Russian",
-#     "slk": "Slovak",
-#     "slv": "Slovenian",
-#     "sna": "Shona",
-#     "snd": "Sindhi",
-#     "som": "Somali",
-#     "spa": "Spanish",
-#     "srp": "Serbian",
-#     "swe": "Swedish",
-#     "swh": "Swahili",
-#     "tam": "Tamil",
-#     "tel": "Telugu",
-#     "tgk": "Tajik",
-#     "tgl": "Tagalog",
-#     "tha": "Thai",
-#     "tur": "Turkish",
-#     "ukr": "Ukrainian",
-#     "urd": "Urdu",
-#     "uzn": "Northern Uzbek",
-#     "vie": "Vietnamese",
-#     "xho": "Xhosa",
-#     "yor": "Yoruba",
-#     "yue": "Cantonese",
-#     "zlm": "Colloquial Malay",
-#     "zsm": "Standard Malay",
-#     "zul": "Zulu",
-# }
 
 app = Flask(__name__)
+CORS(app)
 
 # Initialize Gradio client
-client0 = Client("Debanga/lang_app")
+client0 = Client("abinashbordoloi/Anubaad-Assamese-Translation-Model_NLLB-200")
 
 # Enable CORS for a specific route
 # CORS(app, resources={r"/translate": {"origins": "http://192.168.1.4:19000"}})
 
 
 @app.route('/translate', methods=['POST'])
+
 def translate():
     try:
-        # Get data from the request
         data = request.get_json()
-        print(data)
+        print(f"Received data: {data}")
+        
         source_language = data.get('sourceLanguage')
         target_language = data.get('targetLanguage')
-        print(source_language)
-        print(target_language)
         input_text = data.get('inputText')
-        print(input_text)
+        
+        print(f"Source Language: {source_language}")
+        print(f"Target Language: {target_language}")
+        print(f"Input Text: {input_text}")
+
         source_language = LANGS[source_language]
         target_language = LANGS[target_language]
-        print(source_language)
-        print(target_language)
 
-        # Perform translation using Gradio client
         result = client0.predict(
             source_language,
             target_language,
             input_text,
             api_name="/predict"
         )
-        print(result)
+        print(f"Translation Result: {result}")
         return jsonify(result)
-        return jsonify({"translation": result})
 
     except Exception as e:
+        error_trace = traceback.format_exc()
+        print(f"Error: {error_trace}")
+        return jsonify({"error": str(e), "traceback": error_trace}), 500
+    
+    
+
+@app.route('/dictionary', methods=['POST'])
+def dictionary():
+    try:
+        # Parse the incoming JSON request data
+        data = request.get_json()
+        input_text = data.get('inputText')
+        source_language = data.get('sourceLanguage')
+        
+        # Initialize the transliteration engine
+        e = XlitEngine("as", beam_width=10, rescore=True)
+        
+        # Perform transliteration
+        out = e.translit_word(input_text, topk=5)
+        
+        # Return the result as JSON
+        return jsonify(out), 200
+
+    except Exception as e:
+        # Handle any errors
         return jsonify({"error": str(e)}), 500
 
-
-# Initialize Gradio Client
-client = Client("https://facebook-seamless-m4t-v2-large.hf.space/--replicas/otd97/")
-
-@app.route('/speech-to-speech', methods=['POST'])
-def speech_to_speech():
-    try:
-        data = request.get_json()
-        input_audio = data.get('inputAudio')
-        source_language = data.get('sourceLanguage')
-        target_language = data.get('targetLanguage')
-        
-        result = client.predict(
-            input_audio,
-            source_language,
-            target_language,
-            api_name="/s2st"
-        )
-        return jsonify({"translatedAudio": result[0], "translatedText": result[1]})
-    except Exception as e:
-        error_trace = traceback.format_exc()
-        return jsonify({"error": str(e), "traceback": error_trace}), 500
-
-@app.route('/speech-to-text', methods=['POST'])
-def speech_to_text():
-    try:
-        data = request.get_json()
-        input_audio = data.get('inputAudio')
-        source_language = data.get('sourceLanguage')
-        target_language = data.get('targetLanguage')
-        
-        result = client.predict(
-            input_audio,
-            source_language,
-            target_language,
-            api_name="/s2tt"
-        )
-        return jsonify({"translatedText": result})
-    except Exception as e:
-        error_trace = traceback.format_exc()
-        return jsonify({"error": str(e), "traceback": error_trace}), 500
+    
+    
+client = Client("https://facebook-seamless-m4t-v2-large.hf.space")
 
 @app.route('/text-to-speech', methods=['POST'])
 def text_to_speech():
@@ -212,14 +96,20 @@ def text_to_speech():
     except Exception as e:
         error_trace = traceback.format_exc()
         return jsonify({"error": str(e), "traceback": error_trace}), 500
+    
+    
 
 @app.route('/text-to-text', methods=['POST'])
-def text_to_text():
+def text_to_text(): 
     try:
         data = request.get_json()
         input_text = data.get('inputText')
         source_language = data.get('sourceLanguage')
         target_language = data.get('targetLanguage')
+        print(input_text)
+        print(source_language)
+        print(target_language)
+        
         
         result = client.predict(
             input_text,
@@ -227,6 +117,8 @@ def text_to_text():
             target_language,
             api_name="/t2tt"
         )
+        print(result)
+        
         return jsonify({"translatedText": result})
     except Exception as e:
         error_trace = traceback.format_exc()
