@@ -149,7 +149,7 @@ export default function App() {
                   headerTitle: "Anubad",
                 }}
               />
-            </Stack.Group>
+            </Stack.Group> 
 
             <Stack.Group
               screenOptions={{

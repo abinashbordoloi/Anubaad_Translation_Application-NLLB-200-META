@@ -6,7 +6,7 @@ import { useCallback } from "react";
 import { setSavedItems } from "../store/savedItemsSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default TranslationResult = props => {
+const TranslationResult = props => {
     const dispatch = useDispatch();
 
     const { itemId } = props;
@@ -36,27 +36,26 @@ export default TranslationResult = props => {
         dispatch(setSavedItems({ items: newSavedItems }));
     }, [dispatch, savedItems]);
 
-    return <View style={styles.container}>
-
-        <View style={styles.textContainer}>
-            <Text
-                numberOfLines={4}
-                style={styles.title}>{item.source}</Text>
-            <Text
-                numberOfLines={4}
-                style={styles.subTitle}>{item.translated_text}</Text>
-            <Text
-                numberOfLines={4}
-                style={styles.subTitle}>{item.dateTime}</Text>
+    return (
+        <View style={styles.container}>
+            <View style={styles.textContainer}>
+                <View style={styles.row}>
+                    <Text numberOfLines={4} style={styles.title}>{item.inputText}</Text>
+                    <Text style={styles.language}>{item.languageFrom}</Text>
+                </View>
+                <Text numberOfLines={4} style={styles.title}>{item.source}</Text>
+                <View style={styles.row}>
+                    <Text numberOfLines={4} style={styles.title}>{item.translated_text}</Text>
+                    <Text style={styles.language}>{item.languageTo}</Text>
+                </View>
+                <Text numberOfLines={4} style={styles.subTitle}>{item.dateTime}</Text>
+            </View>
+            <TouchableOpacity onPress={starItem} style={styles.iconContainer}>
+                <Entypo name={starIcon} size={24} color={colors.subTextColor} />
+            </TouchableOpacity>
         </View>
-
-        <TouchableOpacity
-            onPress={starItem}
-            style={styles.iconContainer}>
-            <Entypo name={starIcon} size={24} color={colors.subTextColor} />
-        </TouchableOpacity>
-    </View>
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -66,26 +65,40 @@ const styles = StyleSheet.create({
         borderColor: colors.lightGrey,
         backgroundColor: 'white',
         borderWidth: 0.5,
-        borderTopWidth: 0
+        borderTopWidth: 0,
     },
     textContainer: {
         flex: 1,
-        marginRight: 8
+        marginRight: 8,
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     title: {
         fontFamily: 'medium',
         letterSpacing: 0.3,
-        color: colors.textColor
+        color: colors.textColor,
     },
     subTitle: {
         fontFamily: 'regular',
         letterSpacing: 0.3,
         color: colors.subTextColor,
-        fontSize: 13
+        fontSize: 13,
     },
     iconContainer: {
         width: 30,
         justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
+        alignItems: 'center',
+    },
+    language: {
+        fontFamily: 'regular',
+        letterSpacing: 0.3,
+        color: colors.languageTextColor,
+        fontSize: 12,
+        marginLeft: 10,
+    },
+});
+
+export default TranslationResult;

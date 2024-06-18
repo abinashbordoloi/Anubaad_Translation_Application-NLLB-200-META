@@ -5,6 +5,9 @@ import React, { useState, useEffect } from "react"
 import { View, Text, TextInput, Button, StyleSheet } from "react-native"
 import { db } from "../config/firebase"
 import { collection, getDocs } from "firebase/firestore"
+
+
+
 export default function  DictionaryScreen ()  {
   const [word, setWord] = useState("")
   const [definition, setDefinition] = useState("")

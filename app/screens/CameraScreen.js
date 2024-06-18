@@ -1,28 +1,23 @@
-
-
 //FREE OCR API LOGIC
 import { firebase } from "../config/firebase";
 import * as FileSystem from "expo-file-system";
 import * as ImageManipulator from "expo-image-manipulator";
 import colors from "../utils/colors";
 import React, { useState, useEffect, useCallback, useRef } from "react";
-
 import {
   View,
   Button,
   Image,
   Text,
   StyleSheet,
-  TouchableOpacity, 
+  TouchableOpacity,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Camera, AutoFocus } from "expo-camera";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import { performOCR } from "../utils/ocr"; // Assuming this is correctly imported
-
-
-export default function CameraScreen() {
+export default function CameraComponent() {
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [image, setImage] = useState(null);
@@ -33,8 +28,6 @@ export default function CameraScreen() {
   const isFocused = useIsFocused();
   const requestPermissions = async () => {
     try {
-      console.log(Camera.Constants);
-
       const { status } =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status === "granted") {
@@ -261,7 +254,6 @@ export default function CameraScreen() {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -333,4 +325,3 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
 });
-

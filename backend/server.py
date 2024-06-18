@@ -5,15 +5,15 @@ from lan import LANGS, LANGS2
 import tempfile
 import traceback
 import requests
-from ai4bharat.transliteration import XlitEngine
+# from ai4bharat.transliteration import XlitEngine
 
 
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 # Initialize Gradio client
-client0 = Client("abinashbordoloi/Anubaad-Assamese-Translation-Model_NLLB-200")
+# client0 = Client("abinashbordoloi/Anubaad-Assamese-Translation-Model_NLLB-200")
 
 # Enable CORS for a specific route
 # CORS(app, resources={r"/translate": {"origins": "http://192.168.1.4:19000"}})
@@ -141,5 +141,59 @@ def automatic_speech_recognition():
         error_trace = traceback.format_exc()
         return jsonify({"error": str(e), "traceback": error_trace}), 500
 
+
+
+@app.route('/speech-to-speech', methods=['POST'])
+def speech_to_speech():
+    try:
+        # Check if the POST request has the file part
+        if 'file' not in request.files:
+            return jsonify({"error": "No file part"}), 400
+
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({"error": "No selected file"}), 400
+        
+        
+        
+       
+        
+        
+       
+        
+        
+        
+        
+        # Optional: Handle other form data (sourceLanguage, targetLanguage)
+        source_language = request.form.get('sourceLanguage', 'default_source_language')
+        target_language = request.form.get('targetLanguage', 'default_target_language')
+        uri = request.form.get("uri")
+        
+        print(source_language)
+        print(target_language)
+        print(uri)
+
+        # Perform speech-to-speech translation logic here
+        # Example: translation_result = perform_translation(file, source_language, target_language)
+        result = client.predict(
+            uri,
+            source_language,
+            target_language,
+            api_name="/s2st"
+        )
+        print(result)
+        
+        # translation_result = {
+        #     "translatedAudio": "/path/to/translated/audio.wav",  # Example path
+        #     "translatedText": "Translated text"
+        # }
+
+        # return jsonify(translation_result), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
 if __name__ == '__main__':
-    app.run(host = "0.0.0.0",debug=False, port = 5000)
+    app.run(host='0.0.0.0', port=5000, debug=False)
