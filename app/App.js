@@ -6,12 +6,13 @@ import HomeScreen from "./screens/HomeScreen";
 import DictionaryScreen from "./screens/DictionaryScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import SavedScreen from "./screens/SavedScreen";
-import CameraScreen from "./screens/CameraScreen"
+import CameraComponent from "./screens/CameraScreen"
+import OcrScreen from "./screens/ocrScreen";
 import LanguageSelectScreen from "./screens/LanguageSelectScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import * as SplashScreen from "expo-splash-screen";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import * as Font from "expo-font";
 import colors from "./utils/colors";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -72,7 +73,7 @@ const TabNavigator = () => {
 
 <Tab.Screen
         name="CameraOCR"
-        component={CameraScreen}
+        component={CameraComponent}
         options={{
           tabBarLabel: "Camera OCR",
           tabBarIcon: (props) => (

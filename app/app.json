@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splashscreenA.png",
-      "resizeMode": "fit",
+      "resizeMode": "contain",
       "backgroundColor": "black",
       "justifyContent": "center",
       "alignItems": "center",
@@ -39,7 +39,6 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-
       [
         "expo-camera",
         {
@@ -48,13 +47,10 @@
           "recordAudioAndroid": true
         }
       ],
-      
-      "expo-build-properties",
-    
       [
         "expo-image-picker",
         {
-          "photosPermissionText": "This app needs access to your photos so you can attach them to your posts."
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
     ]
